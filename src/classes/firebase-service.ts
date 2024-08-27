@@ -1,5 +1,13 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, getFirestore } from 'firebase/firestore';
+import {
+	addDoc,
+	collection,
+	deleteDoc,
+	doc,
+	Firestore,
+	getDocs,
+	getFirestore,
+} from 'firebase/firestore';
 import { toDoData, ToDoObject } from '../types';
 
 export class FirebaseService {
@@ -50,11 +58,11 @@ export class FirebaseService {
 		}
 	}
 
-public async getCollection() {
-	return collection(this.db, 'toDoItems')
-}
+	public async getCollection() {
+		return collection(this.db, 'toDoItems');
+	}
 
 	public async deleteTodo(docId: string) {
-		await deleteDoc(doc(this.db, 'toDoItems', docId))
+		await deleteDoc(doc(this.db, 'toDoItems', docId));
 	}
 }

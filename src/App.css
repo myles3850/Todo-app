@@ -1,7 +1,7 @@
-.todoList{
+.todoList {
 	flex: auto;
 	flex-direction: column;
-	padding:10pt;
+	padding: 10pt;
 }
 
 tr {

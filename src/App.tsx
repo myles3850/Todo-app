@@ -47,18 +47,20 @@ function App() {
 					<button type='submit'>add todo</button>
 				</form>
 			</div>
-				<table className='todoList'>
-					<tbody>
-						{todo.map((item) => (
-							<tr id={item.id}>
-								<td>{item.data.item}</td>
-								<td>
-									<button id={item.id} onClick={removeTodoItem}>Remove</button>
-								</td>
-							</tr>
-						))}
-					</tbody>
-				</table>
+			<table className='todoList'>
+				<tbody>
+					{todo.map((item) => (
+						<tr id={item.id}>
+							<td>{item.data.item}</td>
+							<td>
+								<button id={item.id} onClick={removeTodoItem}>
+									Remove
+								</button>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
 		</>
 	);
 }
