@@ -1,9 +1,68 @@
-.todoList {
-	flex: auto;
-	flex-direction: column;
-	padding: 10pt;
+table {
+	width: 300px;
+	border-spacing: 0px;
 }
 
 tr {
-	border: 30pt;
+	transition: background-color 0.6s;
+}
+
+tr:hover {
+	background-color: #ebf5f7;
+	transition: background-color 0.6s;
+}
+
+hr {
+	display: block;
+	height: 1px;
+	border: 0;
+	border-top: 1px solid #ccc;
+	margin: 1em 0;
+	padding: 0;
+}
+
+input {
+	background-color: rgb(187, 189, 194);
+	color: #1b1b1b;
+	border: 1px;
+	border-radius: 3px;
+	width: 150px;
+}
+
+div {
+	margin: auto;
+	width: 50%;
+	padding: 10px;
+	text-align: center;
+}
+
+button {
+	border-radius: 10px;
+	border: 20px;
+	margin: 10px;
+	background-color: rgb(138, 158, 201);
+	transition: background-color 0.3s;
+	color: #323232;
+}
+
+button.create:hover {
+	background-color: #2fb755;
+	transition: background-color 0.5s;
+}
+
+button.delete:hover {
+	background-color: #ff0000;
+	transition: background-color 0.5s;
+}
+
+.todoText {
+	width: 208px;
+	text-align: left;
+}
+
+.newTodo {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	flex-wrap: nowrap;
 }

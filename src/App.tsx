@@ -41,26 +41,33 @@ function App() {
 	return (
 		<>
 			<h2>To-do App</h2>
-			<div className='newTodo'>
-				<form onSubmit={addTodoItem}>
-					<input placeholder='Enter A New To Do Item'></input>
-					<button type='submit'>add todo</button>
-				</form>
+			<form className='newTodo' onSubmit={addTodoItem}>
+				<input placeholder='Enter A New To Do Item'></input>
+				<button type='submit' className='create'>
+					Add to-do
+				</button>
+			</form>
+			<hr />
+			<div className='todoList'>
+				<table className='todoList'>
+					<tbody>
+						{todo.map((item) => (
+							<tr id={item.id}>
+								<td className='todoText'>{item.data.item}</td>
+								<td>
+									<button
+										id={item.id}
+										onClick={removeTodoItem}
+										className='delete'
+									>
+										Remove
+									</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 			</div>
-			<table className='todoList'>
-				<tbody>
-					{todo.map((item) => (
-						<tr id={item.id}>
-							<td>{item.data.item}</td>
-							<td>
-								<button id={item.id} onClick={removeTodoItem}>
-									Remove
-								</button>
-							</td>
-						</tr>
-					))}
-				</tbody>
-			</table>
 		</>
 	);
 }
