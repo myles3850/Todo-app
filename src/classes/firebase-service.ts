@@ -1,5 +1,5 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDocs, getFirestore } from 'firebase/firestore';
 import { toDoData, ToDoObject } from '../types';
 
 export class FirebaseService {
