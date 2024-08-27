@@ -1,35 +1,54 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { FormEvent, useEffect, useState } from 'react';
+import './App.css';
+import { FirebaseService } from './classes/firebase-service';
+import { ToDoObject } from './types';
+import { onSnapshot, query } from 'firebase/firestore';
+
+const fb = FirebaseService.getInstance();
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [todo, setTodo] = useState<ToDoObject[]>([]);
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	async function getTodoList() {
+		const list = await fb.getAllTodo();
+		setTodo(list ?? []);
+	}
+
+	async function addTodoItem(event: FormEvent<HTMLFormElement>) {
+		event.preventDefault();
+
+		const todoItem = (event.currentTarget.elements[0] as HTMLInputElement).value;
+		await fb.addTodo({ item: todoItem });
+		await getTodoList();
+	}
+
+	useEffect(() => {
+		async function fetchData() {
+			const q = query(await fb.getCollection());
+			onSnapshot(q, () => {
+				getTodoList();
+			});
+		}
+		fetchData();
+	}, []);
+
+	return (
+		<>
+			<h2>To-do App</h2>
+			<div className='newTodo'>
+				<form onSubmit={addTodoItem}>
+					<input placeholder='Enter A New To Do Item'></input>
+					<button type='submit'>add todo</button>
+				</form>
+			</div>
+			<button onClick={getTodoList}>show todo list</button>
+			{todo.map((item) => (
+				<tr itemID={item.id}>
+					<td>{item.data.item}</td>
+				</tr>
+			))}
+		</>
+	);
 }
 
-export default App
+export default App;
