@@ -1,0 +1,9 @@
+.todoList{
+	flex: auto;
+	flex-direction: column;
+	padding:10pt;
+}
+
+tr {
+	border: 30pt;
+}

@@ -22,6 +22,12 @@ function App() {
 		await getTodoList();
 	}
 
+	async function removeTodoItem(event: React.MouseEvent<HTMLButtonElement>) {
+		event.preventDefault();
+		const entryId = (event.target as HTMLInputElement).id;
+		await fb.deleteTodo(entryId);
+	}
+
 	useEffect(() => {
 		async function fetchData() {
 			const q = query(await fb.getCollection());
@@ -41,12 +47,18 @@ function App() {
 					<button type='submit'>add todo</button>
 				</form>
 			</div>
-			<button onClick={getTodoList}>show todo list</button>
-			{todo.map((item) => (
-				<tr itemID={item.id}>
-					<td>{item.data.item}</td>
-				</tr>
-			))}
+				<table className='todoList'>
+					<tbody>
+						{todo.map((item) => (
+							<tr id={item.id}>
+								<td>{item.data.item}</td>
+								<td>
+									<button id={item.id} onClick={removeTodoItem}>Remove</button>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
 		</>
 	);
 }

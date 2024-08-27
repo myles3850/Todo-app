@@ -1,5 +1,5 @@
 import { FirebaseApp, initializeApp } from 'firebase/app';
-import { addDoc, collection, Firestore, getDocs, getFirestore } from 'firebase/firestore';
+import { addDoc, collection, deleteDoc, doc, Firestore, getDoc, getDocs, getFirestore } from 'firebase/firestore';
 import { toDoData, ToDoObject } from '../types';
 
 export class FirebaseService {
@@ -40,8 +40,6 @@ export class FirebaseService {
 		try {
 			const data = await getDocs(collection(this.db, 'toDoItems'));
 			data.forEach((doc) => {
-				console.log(`${doc.id} => ${doc.data()}`);
-
 				const data = doc.data() as toDoData;
 				todoList.push({ id: doc.id, data });
 			});
@@ -56,7 +54,7 @@ public async getCollection() {
 	return collection(this.db, 'toDoItems')
 }
 
-	public async modifyTodo() {}
-
-	public async deleteTodo() {}
+	public async deleteTodo(docId: string) {
+		await deleteDoc(doc(this.db, 'toDoItems', docId))
+	}
 }
