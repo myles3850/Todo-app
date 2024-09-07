@@ -44,7 +44,7 @@ function App() {
 			<form className='newTodo' onSubmit={addTodoItem}>
 				<input placeholder='Enter A New To Do Item' required pattern='[a-z|A-Z]\w+'></input>
 				<button type='submit' className='create'>
-					Add to-do
+					Add To-do
 				</button>
 			</form>
 			<hr />
